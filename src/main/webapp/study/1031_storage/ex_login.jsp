@@ -4,10 +4,12 @@
 	// 쿠키를 검색해서 cMid가 있을때 가져와서 아이디입력창에 뿌릴수 있게 한다.
 	Cookie[] cookies = request.getCookies();
 
-	for(int i=0; i<cookies.length; i++) {
-		if(cookies[i].getName().equals("cMid")) {
-			pageContext.setAttribute("mid", cookies[i].getValue());
-			break;
+	if(cookies != null) {
+		for(int i=0; i<cookies.length; i++) {
+			if(cookies[i].getName().equals("cMid")) {
+				pageContext.setAttribute("mid", cookies[i].getValue());
+				break;
+			}
 		}
 	}
 %>
