@@ -14,6 +14,7 @@
     let pictureArray = [];
     let pictureNameArray = [];
     
+    // 콤보상자에서 그림을 선택하면 demoImg에 출력시켜준다.
     function pictureChange() {
     	let picture = myform.picture.value;
     	let str = '<img src="${ctp}/images/'+picture+'" width="300px" />&nbsp;';
@@ -23,6 +24,7 @@
     	myform.pictureName.focus();
     }
     
+    // 선택된 그림을 배열에 저장하기
     function pictureSave() {
     	let picture = myform.picture.value;
     	let pictureName = myform.pictureName.value.trim();
@@ -39,6 +41,7 @@
     	}
     }
     
+    // 배열에 저장되어 있는 전체 그림 보여주기
     function pictureView() {
     	if(pictureArray.length == 0) {
     		alert("저장된 그림이 없습니다.");
@@ -54,6 +57,7 @@
     	demo.innerHTML = str;
     }
     
+    // 배열에 저장된 모든 그림 삭제하기
     function pictureReset() {
     	// location.reload();
     	

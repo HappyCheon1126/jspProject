@@ -9,7 +9,8 @@
 
   while(names.hasMoreElements()) {
   	String sName = (String) names.nextElement();
-  	out.println("세션이름 : " + sName + "<br/>");
+  	out.println("세션이름 : " + sName + " / ");
+  	out.println("세션값 : " + session.getAttribute(sName) + "<br/>");
   }
 %>
 <hr/>

@@ -9,4 +9,51 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <!-- Controller역할(@ webServlet를 대행) -->
+  <servlet>
+    <servlet-name>jjTest1Ok</servlet-name>
+    <servlet-class>study.j1102.Test1Ok</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>jjTest1Ok</servlet-name>
+    <url-pattern>/j1102/test1Ok</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>jjTest1Ok2</servlet-name>
+    <servlet-class>study.j1102.Test1Ok2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>jjTest1Ok2</servlet-name>
+    <url-pattern>/j1102/test1Ok2</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Filter처리(Controller앞단에서 제어한다.) -->
+  <!-- 
+  <filter>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>filter.EncodingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+   -->
+   
+   <!--  메소드(컨트롤러~) 들을 감시... 
+   <listener>
+     <listener-class>study.j1102.Test2Ok</listener-class>
+   </listener>
+    -->
+    
+   <!-- 초기값(공통변수) 설정미리해 두기 -->
+   <context-param>
+     <param-name>logoName</param-name>
+     <param-value>Java Green Company</param-value>
+   </context-param>
+   <context-param>
+     <param-name>homeAddress</param-name>
+     <param-value>http://192.168.50.20:9090/javaProject/study/1102_web_xml/test1.jsp</param-value>
+   </context-param>
 </web-app>
