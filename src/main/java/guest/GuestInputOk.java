@@ -20,6 +20,9 @@ public class GuestInputOk extends HttpServlet {
 		String content = request.getParameter("content")==null ? "" : request.getParameter("content");
 		String hostIp = request.getParameter("hostIp")==null ? "" : request.getParameter("hostIp");
 		
+		name = name.replace("<", "&lt;");
+		name = name.replace(">", "&gt;");
+		
 		GuestVO vo = new GuestVO();
 		
 		vo.setName(name);
@@ -37,6 +40,7 @@ public class GuestInputOk extends HttpServlet {
     	out.println("<script>");
     	out.println("alert('방명록에 글이 등록되었습니다.');");
     	out.println("location.href='"+request.getContextPath()+"/GuestList';");
+//    	out.println("location.href='"+request.getContextPath()+"/guest/guestList.jsp';");
     	out.println("</script>");
 		}
 		else {

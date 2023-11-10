@@ -8,6 +8,8 @@ public class SecurityUtil {
     String sha = "";
     try{
        MessageDigest sh = MessageDigest.getInstance("SHA-256");
+       // int salt = (int)(Math.random()*100) + 1;
+       // str += salt;
        sh.update(str.getBytes());
        byte byteData[] = sh.digest();
        StringBuffer sb = new StringBuffer();
