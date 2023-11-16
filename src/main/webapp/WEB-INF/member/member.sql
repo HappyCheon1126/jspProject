@@ -35,3 +35,8 @@ drop table member;
 desc member;
 
 select * from member;
+
+
+select *, timestampdiff(day, lastDate, now()) as deleteDiff from member order by idx desc limit 0,5;
+
+

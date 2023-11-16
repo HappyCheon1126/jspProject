@@ -23,7 +23,7 @@
   <div><img src="${ctp}/images/member/noimage.jpg" width="200px"/></div>
   <hr/>
   <div>
-  	<p>현재 ${sNickName}(${strLevel})님이 로그인 중이십니다.</p>
+  	<p>현재 <font color="blue"><b>${sNickName}(${strLevel})</b></font>님이 로그인 중이십니다.</p>
   	<p>총 방문횟수 : ${mVo.visitCnt}회</p>
   	<p>오늘 방문횟수 : ${mVo.todayCnt}회</p>
   	<p>총 보유 포인트 : ${mVo.point}점</p>

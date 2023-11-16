@@ -12,7 +12,7 @@
 <body style="background-color:#eee">
 <p><br/></p>
 <div class="text-center">
-  <h5>관리자메뉴</h5>
+  <h5><a href="adminMain.ad" target="_top">관리자메뉴</a></h5>
   <hr/>
   <p><a href="${ctp}/" target="_top">홈으로</a></p>
   <hr/>

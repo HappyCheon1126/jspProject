@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import admin.member.MemberLevelChangeCommand;
 import member.MemberListCommand;
 
 @SuppressWarnings("serial")
@@ -25,7 +26,12 @@ public class AdminController extends HttpServlet {
 		HttpSession session = request.getSession();
 		int level = session.getAttribute("sLevel")==null ? 99 : (int) session.getAttribute("sLevel");
 		
-		if(level > 0) {
+		if(com.equals("/main")) {
+			command = new MainCommand();
+			command.execute(request, response);
+			viewPage = "/WEB-INF/main/main.jsp";
+		}
+		else if(level > 0) {
 			request.getRequestDispatcher("/").forward(request, response);
 		}
 		else if(com.equals("/adminMain")) {
@@ -35,6 +41,8 @@ public class AdminController extends HttpServlet {
 			viewPage += "/adminLeft.jsp";
 		}
 		else if(com.equals("/adminContent")) {
+			command = new AdminContentCommand();
+			command.execute(request, response);
 			viewPage += "/adminContent.jsp";
 		}
 		else if(com.equals("/adminMemberList")) {
@@ -46,6 +54,11 @@ public class AdminController extends HttpServlet {
 			command = new MemberLevelChangeCommand();
 			command.execute(request, response);
 			return;
+		}
+		else if(com.equals("/adminMemberInfor")) {
+			command = new AdminMemberInforCommand();
+			command.execute(request, response);
+			viewPage += "/member/adminMemberInfor.jsp";
 		}
 		
 		request.getRequestDispatcher(viewPage).forward(request, response);
