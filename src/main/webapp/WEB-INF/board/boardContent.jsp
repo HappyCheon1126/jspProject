@@ -135,6 +135,22 @@
     		}
     	});
     }
+    
+    // 신고시 '기타'텍스트항목 보여주기
+    function etcShow() {
+    	$("#complaintTxt").show();
+    }
+    
+    // 신고화면 선택후 신고사항 전송하기
+    function complaintCheck() {
+    	if (!$("input[type=radio][name=complaint]:checked").is(':checked')) {
+        alert('신고항목을 선택하세요');
+        return false;
+      }
+    	if($("input[type=radio][id=complaint7]:checked").val() == 'on') {
+        alert("신고하러갑니다." + $("input[type=radio][id=complaint7]:checked").val());
+    	}
+    }
   </script>
 </head>
 <body>
@@ -185,12 +201,15 @@
       <td class="text-left">
         <c:if test="${flag != 'search'}"><input type="button" value="돌아가기" onclick="location.href='boardList.bo?pag=${pag}&pageSize=${pageSize}';" class="btn btn-warning"/> &nbsp;</c:if>
         <c:if test="${flag == 'search'}"><input type="button" value="돌아가기" onclick="location.href='boardSearch.bo?pag=${pag}&pageSize=${pageSize}&search=${search}&searchString=${searchString}';" class="btn btn-warning"/> &nbsp;</c:if>
+      </td>
+      <td class="text-right">
+        <%-- <c:if test="${vo.mid != sMid}"><a href="complaintInput.ad" class="btn btn-danger">신고하기</a></c:if> --%>
+        <c:if test="${vo.mid != sMid}"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">신고하기</button></c:if>
         <c:if test="${sMid == vo.mid || sLevel == 0}">
         	<input type="button" value="수정하기" onclick="location.href='boardUpdate.bo?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}';" class="btn btn-info"/> &nbsp;
         	<input type="button" value="삭제하기" onclick="boardDelete()" class="btn btn-danger"/>
         </c:if>
       </td>
-      <td class="text-right"><a href="complaintInput.ad" class="btn btn-danger">신고하기</a></td>
     </tr>
   </table>
   <hr/>
@@ -251,8 +270,46 @@
       </tr>
     </table>
   </form>
-  
 </div>
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content modal-sm">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title">현재 게시글을 신고합니다.</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <b>신고사유 선택</b>
+        <hr class="m-2"/>
+        <form name="modalForm">
+          <div class="form-check"><input type="radio" name="complaint" id="complaint1" class="form-check-input"/>욕설,비방,차별,혐오</div>
+          <div class="form-check"><input type="radio" name="complaint" id="complaint2" class="form-check-input"/>홍보,영리목적</div>
+          <div class="form-check"><input type="radio" name="complaint" id="complaint3" class="form-check-input"/>불법정보</div>
+          <div class="form-check"><input type="radio" name="complaint" id="complaint4" class="form-check-input"/>음란,청소년유해</div>
+          <div class="form-check"><input type="radio" name="complaint" id="complaint5" class="form-check-input"/>개인정보노출,유포,거래</div>
+          <div class="form-check"><input type="radio" name="complaint" id="complaint6" class="form-check-input"/>도배,스팸</div>
+          <div class="form-check"><input type="radio" name="complaint" id="complaint7" class="form-check-input" onclick="etcShow()"/>기타</div>
+          <div id="etc"><textarea rows="2" name="complaintTxt" id="complaintTxt" class="form-control" style="display:none;"></textarea></div>
+          <hr class="m-1"/>
+          현재글 제목 : <span class="mb-2">${vo.title}</span><br/>
+          신고자 아이디 : <span class="mb-2">${sMid}</span>
+          <hr class="m-2"/>
+          <input type="button" value="확인" onclick="complaintCheck()" class="btn btn-success form-control" />
+          <input type="hidden" name="idx" id="idx" value="${vo.idx}"/>
+        </form>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <p><br/></p>
 <jsp:include page="/include/footer.jsp" />
 </body>
