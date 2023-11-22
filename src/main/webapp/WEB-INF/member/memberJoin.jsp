@@ -117,7 +117,7 @@
 	    		alert("업로드 가능한 파일은 'jgp/gif/png/zip/hwp/ppt/pptx/xlsx' 만 가능합니다.");
 	    	}
 	    	else if(fileSize > maxSize) {
-	    		alert("업로드할 파일의 최대용량은 10MByte입니다.");
+	    		alert("업로드할 파일의 최대용량은 5MByte입니다.");
 	    	}
 	    	submitFlag == 1;
     	}

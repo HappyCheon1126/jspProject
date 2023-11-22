@@ -45,7 +45,7 @@
 	        <a class="nav-link" href="boardList.bo">Board</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="/PdsList">Pds</a>
+	        <c:if test="${level != 1}"><a class="nav-link" href="pdsList.pds">Pds</a></c:if>
 	      </li>    
 	      <li class="nav-item ml-2 mr-2">
 	        <div class="dropdown">

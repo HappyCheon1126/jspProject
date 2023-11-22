@@ -147,9 +147,35 @@
         alert('신고항목을 선택하세요');
         return false;
       }
-    	if($("input[type=radio][id=complaint7]:checked").val() == 'on') {
-        alert("신고하러갑니다." + $("input[type=radio][id=complaint7]:checked").val());
+    	if($("input[type=radio][id=complaint7]:checked").val() == 'on' && $("#complaintTxt").val() == "") {
+        alert("기타 사유를 입력해 주세요.");
+        return false;
     	}
+      //alert("신고하러갑니다." + $("input[type=radio][id=complaint7]:checked").val());
+    	
+      let cpContent = modalForm.complaint.value;
+      if(cpContent == '기타') cpContent += "/" + $("#complaintTxt").val();
+      
+      $.ajax({
+    	  url  : "boardComplaintInput.ad",
+    	  type : "post",
+    	  data : {
+    		  part    : 'board',
+    		  partIdx : ${vo.idx},
+    		  cpMid   : '${sMid}',
+    		  cpContent : cpContent
+    	  },
+    	  success:function(res) {
+    		  if(res == "1") {
+    			  alert("신고 되었습니다.");
+    			  location.reload();
+    		  }
+    		  else alert('신고 실패~~');
+    	  },
+    	  error : function() {
+    		  alert('전송오류!');
+    	  }
+      });
     }
   </script>
 </head>
@@ -286,13 +312,13 @@
         <b>신고사유 선택</b>
         <hr class="m-2"/>
         <form name="modalForm">
-          <div class="form-check"><input type="radio" name="complaint" id="complaint1" class="form-check-input"/>욕설,비방,차별,혐오</div>
-          <div class="form-check"><input type="radio" name="complaint" id="complaint2" class="form-check-input"/>홍보,영리목적</div>
-          <div class="form-check"><input type="radio" name="complaint" id="complaint3" class="form-check-input"/>불법정보</div>
-          <div class="form-check"><input type="radio" name="complaint" id="complaint4" class="form-check-input"/>음란,청소년유해</div>
-          <div class="form-check"><input type="radio" name="complaint" id="complaint5" class="form-check-input"/>개인정보노출,유포,거래</div>
-          <div class="form-check"><input type="radio" name="complaint" id="complaint6" class="form-check-input"/>도배,스팸</div>
-          <div class="form-check"><input type="radio" name="complaint" id="complaint7" class="form-check-input" onclick="etcShow()"/>기타</div>
+          <div class="form-check"><input type="radio" name="complaint" id="complaint1" value="욕설,비방,차별,혐오" class="form-check-input"/>욕설,비방,차별,혐오</div>
+          <div class="form-check"><input type="radio" name="complaint" id="complaint2" value="홍보,영리목적" class="form-check-input"/>홍보,영리목적</div>
+          <div class="form-check"><input type="radio" name="complaint" id="complaint3" value="불법정보" class="form-check-input"/>불법정보</div>
+          <div class="form-check"><input type="radio" name="complaint" id="complaint4" value="음란,청소년유해" class="form-check-input"/>음란,청소년유해</div>
+          <div class="form-check"><input type="radio" name="complaint" id="complaint5" value="개인정보노출,유포,거래" class="form-check-input"/>개인정보노출,유포,거래</div>
+          <div class="form-check"><input type="radio" name="complaint" id="complaint6" value="도배,스팸" class="form-check-input"/>도배,스팸</div>
+          <div class="form-check"><input type="radio" name="complaint" id="complaint7" value="기타" class="form-check-input" onclick="etcShow()"/>기타</div>
           <div id="etc"><textarea rows="2" name="complaintTxt" id="complaintTxt" class="form-control" style="display:none;"></textarea></div>
           <hr class="m-1"/>
           현재글 제목 : <span class="mb-2">${vo.title}</span><br/>

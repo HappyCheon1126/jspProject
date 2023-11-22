@@ -14,14 +14,14 @@ public class MemberListCommand implements AdminInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int level = request.getParameter("level")==null ? 99 : Integer.parseInt(request.getParameter("level"));
+		int level = request.getParameter("level")==null ? 999 : Integer.parseInt(request.getParameter("level"));
 		MemberDAO dao = new MemberDAO();
 		
 		// 1.현재 페이지번호를 구한다.
 		int pag = request.getParameter("pag")==null ? 1 : Integer.parseInt(request.getParameter("pag"));
 		
 		// 2.한페이지의 분량을 결정한다.
-		int pageSize = request.getParameter("pageSize")==null ? 3 : Integer.parseInt(request.getParameter("pageSize"));
+		int pageSize = request.getParameter("pageSize")==null ? 5 : Integer.parseInt(request.getParameter("pageSize"));
 		
 		// 3.총 레코드 건수를 구한다.(sql명령어중 count함수 사용)
 		int totRecCnt = dao.getTotRecCnt(level);

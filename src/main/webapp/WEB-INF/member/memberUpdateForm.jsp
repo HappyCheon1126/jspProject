@@ -98,10 +98,13 @@
 	    		alert("업로드 가능한 파일은 'jgp/gif/png/zip/hwp/ppt/pptx/xlsx' 만 가능합니다.");
 	    	}
 	    	else if(fileSize > maxSize) {
-	    		alert("업로드할 파일의 최대용량은 10MByte입니다.");
+	    		alert("업로드할 파일의 최대용량은 5MByte입니다.");
 	    	}
 	    	submitFlag == 1;
     	}
+    	//else {
+    	//	document.getElementById("photo").value = '${vo.photo}';
+    	//}
   		
   		
     	// 전송전에 모든 체크가 끝나면 submitFlag가 1로 되게된다. 이때 값들을 서버로 전송처리한다.
@@ -166,7 +169,7 @@
 <jsp:include page="/include/header.jsp" />
 <p><br/></p>
 <div class="container">
-  <form name="myform" method="post" action="${ctp}/memberUpdateOk.mem" class="was-validated">
+  <form name="myform" method="post" action="${ctp}/memberUpdateOk.mem" class="was-validated" enctype="multipart/form-data">
     <h2>회 원 정 보 수 정</h2>
     <br/>
     <div>아이디 : ${sMid}</div>
@@ -307,6 +310,7 @@
     <input type="hidden" name="tel" />
     <input type="hidden" name="address" />
     <input type="hidden" name="mid" value="${sMid}" />
+    <input type="hidden" name="photo" id="photo" value="${vo.photo}" />
   </form>
 </div>
 <p><br/></p>

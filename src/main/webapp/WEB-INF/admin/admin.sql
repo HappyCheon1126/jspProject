@@ -12,3 +12,7 @@ create table complaint (
 );
 desc complaint;
 
+select c.*,b.title from complaint c, board b where c.partIdx=b.idx order by c.idx desc;
+select c.*,b.nickName as name, b.title as title from complaint c, board b where c.partIdx=b.idx order by c.idx desc;
+select c.*,date_format(c.cpDate, '%Y-%m-%d %H:%i') as cpDate,b.nickName as name, b.title as title from complaint c, board b where c.partIdx=b.idx order by c.idx desc;
+

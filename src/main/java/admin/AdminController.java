@@ -9,7 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import admin.complaint.BoardComplaintInputCommand;
+import admin.complaint.BoardComplaintListCommand;
+import admin.member.AdminMemberInforCommand;
 import admin.member.MemberLevelChangeCommand;
+import admin.review.ReviewInputCommand;
 import member.MemberListCommand;
 
 @SuppressWarnings("serial")
@@ -24,12 +28,22 @@ public class AdminController extends HttpServlet {
 		com = com.substring(com.lastIndexOf("/"),com.lastIndexOf("."));
 		
 		HttpSession session = request.getSession();
-		int level = session.getAttribute("sLevel")==null ? 99 : (int) session.getAttribute("sLevel");
+		int level = session.getAttribute("sLevel")==null ? 999 : (int) session.getAttribute("sLevel");
 		
 		if(com.equals("/main")) {
 			command = new MainCommand();
 			command.execute(request, response);
 			viewPage = "/WEB-INF/main/main.jsp";
+		}
+		else if(com.equals("/reviewInput")) {
+			command = new ReviewInputCommand();
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("/boardComplaintInput")) {
+			command = new BoardComplaintInputCommand();
+			command.execute(request, response);
+			return;
 		}
 		else if(level > 0) {
 			request.getRequestDispatcher("/").forward(request, response);
@@ -60,6 +74,12 @@ public class AdminController extends HttpServlet {
 			command.execute(request, response);
 			viewPage += "/member/adminMemberInfor.jsp";
 		}
+		else if(com.equals("/boardComplaintList")) {
+			command = new BoardComplaintListCommand();
+			command.execute(request, response);
+			viewPage += "/complaint/boardComplaintList.jsp";
+		}
+		
 		
 		request.getRequestDispatcher(viewPage).forward(request, response);
 	}

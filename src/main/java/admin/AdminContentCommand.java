@@ -16,9 +16,11 @@ public class AdminContentCommand implements AdminInterface {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MemberDAO mDao = new MemberDAO();
 		
-		ArrayList<MemberVO> mVos = mDao.getMemberList(0,5,1);
+		ArrayList<MemberVO> mVos = mDao.getMemberList(0,999,1);
+		ArrayList<MemberVO> m99Vos = mDao.getMemberList(0,999,99);
 		
 		request.setAttribute("mCount", mVos.size());
+		request.setAttribute("m99Count", m99Vos.size());
 	}
 
 }

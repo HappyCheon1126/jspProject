@@ -18,8 +18,8 @@ public class MListCommand implements MemberInterface {
 		
 		// 페이징처리
 		int pag = request.getParameter("pag")==null ? 1 : Integer.parseInt(request.getParameter("pag"));
-		int pageSize = request.getParameter("pageSize")==null ? 3 : Integer.parseInt(request.getParameter("pageSize"));
-		int totRecCnt = dao.getTotRecCnt(99);
+		int pageSize = request.getParameter("pageSize")==null ? 5 : Integer.parseInt(request.getParameter("pageSize"));
+		int totRecCnt = dao.getTotRecCnt(999);
 		int totPage = (totRecCnt % pageSize)==0 ? (totRecCnt / pageSize) : (totRecCnt / pageSize) + 1 ;
 		int startIndexNo = (pag - 1) * pageSize;
 		int curScrStartNo = totRecCnt - startIndexNo;
@@ -28,7 +28,7 @@ public class MListCommand implements MemberInterface {
 		int curBlock = (pag - 1) / blockSize;
 		int lastBlock = (totPage - 1) / blockSize;
 		
-		ArrayList<MemberVO> vos = dao.getMemberList(startIndexNo, pageSize, 99);
+		ArrayList<MemberVO> vos = dao.getMemberList(startIndexNo, pageSize, 999);
 		
 		request.setAttribute("vos", vos);
 		request.setAttribute("pag", pag);

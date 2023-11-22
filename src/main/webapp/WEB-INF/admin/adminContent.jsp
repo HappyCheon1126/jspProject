@@ -17,6 +17,7 @@
   <p>방명록 새글 : ???</p>
   <p>게시글 새글 : ???</p>
   <p>신규등록회원 : <a href="adminMemberList.ad?level=1">${mCount}</a>건</p>
+  <p>탈퇴신청회원 : <a href="adminMemberList.ad?level=99">${m99Count}</a>건</p>
 </div>
 <p><br/></p>
 </body>

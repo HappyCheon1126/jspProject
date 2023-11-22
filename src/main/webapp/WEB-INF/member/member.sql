@@ -19,7 +19,7 @@ create table member (
   userInfor char(3) default '공개',				/* 회원 정보 공개여부(공개/비공개) */
   userDel   char(2)  default 'NO',			/* 회원 탈퇴신청여부(NO:현재 활동중, OK:탈퇴신청중) */
   point		  int default 100,						/* 회원 누적포인트(가입포인트100점, 1회방문시 10포인트증가, 1일 최대 50포인트까지 허용, 물건구매시 100원당 1포인트 증가 */
-  level     int default 1,							/* 회원등급(0:관리자, 1:준회원, 2:정회원, 3:우수회원, (4:운영자)) */
+  level     int default 1,							/* 회원등급(0:관리자, 1:준회원, 2:정회원, 3:우수회원, (4:운영자)) , 99:탈퇴신청회원 */
   visitCnt  int default 0,							/* 총 방문횟수 */
   startDate datetime default now(),			/* 최초 가입일 */
   lastDate  datetime default now(),			/* 마지막 접속일 */
@@ -36,7 +36,15 @@ desc member;
 
 select * from member;
 
-
 select *, timestampdiff(day, lastDate, now()) as deleteDiff from member order by idx desc limit 0,5;
 
+/* 실시간 DB 채팅 테이블 설계 */
+create table memberChat (
+  idx   int not null auto_increment primary key,
+  nickName varchar(30) not null,
+  chat     varchar(100) not null
+);
+desc memberChat;
+
+select * from memberChat order by idx desc limit 50;
 

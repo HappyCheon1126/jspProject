@@ -46,7 +46,7 @@
       <th>성별</th>
       <th>공개여부</th>
       <th>오늘방문횟수</th>
-      <th>회원등급</th>
+      <!-- <th>회원등급</th> -->
     </tr>
     <c:forEach var="vo" items="${vos}" varStatus="st">
       <tr>
@@ -64,6 +64,7 @@
 	        <td>${vo.gender}</td>
 	        <td>${vo.userInfor}</td>
 	        <td>${vo.todayCnt}</td>
+	        <%-- 
 	        <td>
 	          <c:choose>
 	            <c:when test="${vo.level == 0}">관리자</c:when>
@@ -73,9 +74,10 @@
 	            <c:otherwise></c:otherwise>
 	          </c:choose>
 	        </td>
+	         --%>
         </c:if>
         <c:if test="${vo.userInfor != '공개' && vo.mid != sMid && sLevel != 0}">
-          <td colspan="5">비공개</td>
+          <td colspan="4">비공개</td>
         </c:if>
       </tr>
       <c:set var="curScrStartNo" value="${curScrStartNo - 1}"/>
