@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import study2.ajax1.AjaxTest1OkCommand;
+import study2.apiTest.SaveCrimeDataCommand;
 import study2.pdstest.FileDownloadCommand;
 import study2.pdstest.FileUpload1OkCommand;
 import study2.pdstest.FileUpload2OkCommand;
@@ -86,7 +87,50 @@ public class StudyController extends HttpServlet {
 			command.execute(request, response);
 			return;
 		}
-	
+		else if(com.equals("/calendar1")) {
+			command = new Calendar1Command();
+			command.execute(request, response);
+			viewPage += "/calendar/calendar1.jsp";
+		}
+		else if(com.equals("/calendar2")) {
+			command = new Calendar2Command();
+			command.execute(request, response);
+			viewPage += "/calendar/calendar2.jsp";
+		}
+		else if(com.equals("/api1")) {
+			viewPage += "/apiTest/api1.jsp";
+		}
+		else if(com.equals("/apiFetch")) {
+			viewPage += "/apiTest/apiFetch.jsp";
+		}
+		else if(com.equals("/apiTest")) {
+			viewPage += "/apiTest/apiTest.jsp";
+		}
+		else if(com.equals("/saveCrimeData")) {
+			command = new SaveCrimeDataCommand();
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("/deleteCrimeData")) {
+			command = new DeleteCrimeDataCommand();
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("/listCrimeData")) {
+			command = new ListCrimeDataCommand();
+			command.execute(request, response);
+			viewPage += "/apiTest/apiTest.jsp";
+		}
+		else if(com.equals("/policeCheck")) {
+			command = new PoliceCheckCommand();
+			command.execute(request, response);
+			viewPage += "/apiTest/apiTest.jsp";
+		}
+		else if(com.equals("/yearPoliceCheck")) {
+			command = new YearPoliceCheckCommand();
+			command.execute(request, response);
+			viewPage += "/apiTest/apiTest.jsp";
+		}
 		
 		request.getRequestDispatcher(viewPage).forward(request, response);
 	}

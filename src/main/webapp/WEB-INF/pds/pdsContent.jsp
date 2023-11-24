@@ -80,6 +80,20 @@
     		}
     	});
     }
+    
+    // 화살표클릭시 화면 처음으로 부드럽게 이동시키기
+    $(window).scroll(function(){
+    	if($(this).scrollTop() > 100) {
+    		$("#topBtn").addClass("on");
+    	}
+    	else {
+    		$("#topBtn").removeClass("on");
+    	}
+    	
+    	$("#topBtn").click(function(){
+    		window.scrollTo({top:0, behavior: "smooth"});	// 현재 페이지에서 특정 위치로 스크로이동시키는 명령어(window.scrollTo)
+    	});
+    });
   </script>
   <style>
     th {
@@ -227,6 +241,7 @@
     </c:forEach>
   </div>
 </div>
+<h6 id="topBtn" class="text-right mr-3"><img src="${ctp}/images/arrowTop.gif"/></h6>
 <p><br/></p>
 <jsp:include page="/include/footer.jsp" />
 </body>
